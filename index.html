@@ -80,34 +80,45 @@
 <section class="heritage" id="about">
   <div class="container">
     <h2 class="section-title reveal">
-      भारत का सबसे भरोसेमंद <span class="green">Eye Care Formula !</span>
+      <span class="white">भारत का सबसे भरोसेमंद</span> <span class="green">Eye Care Formula !</span>
     </h2>
     <span class="title-underline reveal"></span>
 
-    <div class="cert-grid">
-      <div class="cert-item reveal">
-        <div class="cert-img"><img src="https://www.figma.com/api/mcp/asset/5d3fa188-e389-4f82-aea0-0e191ea1cb59" alt="WHO Certified" loading="lazy" /></div>
-        <p>WHO<br/>Certified</p>
+    <div class="cert-stage reveal" role="list" aria-label="Certifications">
+      <!-- Central lab image -->
+      <div class="cert-center" role="listitem" aria-label="Premium clean laboratory">
+        <img src="https://www.figma.com/api/mcp/asset/33e481ef-ef06-4158-bedc-987c31d6224e" alt="Premium clean laboratory testing" loading="lazy" />
       </div>
-      <div class="cert-item reveal">
-        <div class="cert-img"><img src="https://www.figma.com/api/mcp/asset/efd21f9c-a31c-4178-8063-31602b9a4156" alt="CTRI Registered" loading="lazy" /></div>
-        <p>CTRI<br/>Registered</p>
-      </div>
-      <div class="cert-item center-cert reveal">
-        <div class="cert-img big"><img src="https://www.figma.com/api/mcp/asset/33e481ef-ef06-4158-bedc-987c31d6224e" alt="Lab tested" loading="lazy" /></div>
-      </div>
-      <div class="cert-item reveal">
-        <div class="cert-img"><img src="https://www.figma.com/api/mcp/asset/c0ae2497-1b32-4a25-9a53-b0e8585f5750" alt="Clinically Tested" loading="lazy" /></div>
-        <p>Clinically<br/>Tested</p>
-      </div>
-      <div class="cert-item reveal">
-        <div class="cert-img"><img src="https://www.figma.com/api/mcp/asset/8ce68a67-b1db-4312-a074-791ba316242e" alt="GMP Certified" loading="lazy" /></div>
-        <p>GMP<br/>Certified</p>
-      </div>
-      <div class="cert-item reveal">
-        <div class="cert-img"><img src="https://www.figma.com/api/mcp/asset/efd21f9c-a31c-4178-8063-31602b9a4156" alt="Ayush Certified" loading="lazy" /></div>
-        <p>Ayush<br/>Certified</p>
-      </div>
+
+      <!-- WHO - top left -->
+      <button type="button" class="cert-badge pos-tl" role="listitem" aria-label="WHO Certified">
+        <span class="cert-img"><img src="https://www.figma.com/api/mcp/asset/5d3fa188-e389-4f82-aea0-0e191ea1cb59" alt="WHO Certified logo" loading="lazy" /></span>
+        <span class="cert-label">WHO<br/>Certified</span>
+      </button>
+
+      <!-- CTRI - top right -->
+      <button type="button" class="cert-badge pos-tr" role="listitem" aria-label="CTRI Registered">
+        <span class="cert-img"><img src="https://www.figma.com/api/mcp/asset/efd21f9c-a31c-4178-8063-31602b9a4156" alt="CTRI Registered logo" loading="lazy" /></span>
+        <span class="cert-label">CTRI<br/>Registered</span>
+      </button>
+
+      <!-- Clinically Tested - middle left -->
+      <button type="button" class="cert-badge pos-ml" role="listitem" aria-label="Clinically Tested">
+        <span class="cert-img"><img src="https://www.figma.com/api/mcp/asset/c0ae2497-1b32-4a25-9a53-b0e8585f5750" alt="Clinically Tested badge" loading="lazy" /></span>
+        <span class="cert-label">Clinically<br/>Tested</span>
+      </button>
+
+      <!-- Ayush - middle right -->
+      <button type="button" class="cert-badge pos-mr" role="listitem" aria-label="Ayush Certified">
+        <span class="cert-img"><img src="https://www.figma.com/api/mcp/asset/8ce68a67-b1db-4312-a074-791ba316242e" alt="Ayush Certified badge" loading="lazy" /></span>
+        <span class="cert-label">Ayush<br/>Certified</span>
+      </button>
+
+      <!-- GMP - bottom center -->
+      <button type="button" class="cert-badge pos-bc" role="listitem" aria-label="GMP Certified">
+        <span class="cert-img"><img src="https://www.figma.com/api/mcp/asset/8ce68a67-b1db-4312-a074-791ba316242e" alt="GMP Quality badge" loading="lazy" /></span>
+        <span class="cert-label">GMP<br/>Certified</span>
+      </button>
     </div>
   </div>
 </section>

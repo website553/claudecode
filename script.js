@@ -29,6 +29,18 @@
 
   /* ---------- Interactive button feedback (ripple + haptic) ---------- */
   const interactiveBtns = document.querySelectorAll('.cta-btn, .nav-cta, .float-call');
+
+  /* Cert badge click pulse */
+  document.querySelectorAll('.cert-badge').forEach(badge => {
+    badge.addEventListener('click', () => {
+      const img = badge.querySelector('.cert-img');
+      if (!img) return;
+      img.classList.remove('pulsed');
+      void img.offsetWidth; // restart animation
+      img.classList.add('pulsed');
+      if (navigator.vibrate) navigator.vibrate(12);
+    });
+  });
   interactiveBtns.forEach(btn => {
     btn.style.position = btn.style.position || 'relative';
     btn.addEventListener('click', e => {

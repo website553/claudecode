@@ -179,24 +179,81 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 }
 
 /* ==================== HERITAGE / CERTS ==================== */
-.heritage{padding:90px 20px}
-.cert-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:40px 60px;margin-top:30px;align-items:start;
+.heritage{padding:90px 20px 110px}
+
+.cert-stage{
+  position:relative;
+  width:100%;max-width:1100px;margin:50px auto 0;
+  aspect-ratio: 1100 / 640;
 }
-.cert-item{display:flex;flex-direction:column;align-items:center;gap:14px;transition:transform .3s}
-.cert-item:hover{transform:translateY(-6px)}
-.cert-img{
-  width:140px;height:140px;border-radius:50%;
-  background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;
-  box-shadow:0 12px 30px rgba(0,0,0,.4);
-  transition:box-shadow .3s;
+
+/* Central laboratory circle */
+.cert-center{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:38%;aspect-ratio:1/1;border-radius:50%;
+  overflow:hidden;
+  box-shadow:0 24px 60px rgba(0,0,0,.55), 0 0 0 6px rgba(255,255,255,.08);
+  background:#0c0c0c;
+  animation:floatY 6s ease-in-out infinite;
 }
-.cert-img img{width:80%;height:80%;object-fit:contain}
-.cert-img.big{width:300px;height:300px;border-radius:50%;background:linear-gradient(135deg,#fff,#e8e8e8)}
-.cert-img.big img{width:90%;height:90%}
-.cert-item p{font-size:clamp(16px,1.9vw,25px);font-weight:700;text-align:center;color:#fff;line-height:1.2}
-.cert-item.center-cert{grid-row:span 2;justify-self:center;align-self:center}
+.cert-center img{width:100%;height:100%;object-fit:cover}
+
+@keyframes floatY{
+  0%,100%{transform:translate(-50%,-50%)}
+  50%{transform:translate(-50%,calc(-50% - 10px))}
+}
+
+/* Cert badges (interactive buttons) */
+.cert-badge{
+  position:absolute;
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  background:transparent;border:0;padding:0;cursor:pointer;
+  font:inherit;color:#fff;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1);
+  outline:none;
+}
+.cert-badge:focus-visible{outline:3px solid var(--green);outline-offset:6px;border-radius:18px}
+.cert-badge:hover{transform:translateY(-8px) scale(1.05)}
+.cert-badge:active{transform:translateY(-2px) scale(.98)}
+
+.cert-badge .cert-img{
+  width:clamp(110px,12vw,160px);height:clamp(110px,12vw,160px);
+  border-radius:50%;background:#fff;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  box-shadow:0 12px 30px rgba(0,0,0,.45);
+  transition:box-shadow .35s ease, transform .35s ease;
+  position:relative;
+}
+.cert-badge .cert-img::after{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  box-shadow:inset 0 0 0 3px rgba(108,195,32,0);
+  transition:box-shadow .35s ease;
+}
+.cert-badge:hover .cert-img{box-shadow:0 18px 38px rgba(108,195,32,.45)}
+.cert-badge:hover .cert-img::after{box-shadow:inset 0 0 0 3px rgba(108,195,32,.85)}
+.cert-badge .cert-img img{width:82%;height:82%;object-fit:contain}
+.cert-badge .cert-img.pulsed{animation:certPulse .6s ease}
+@keyframes certPulse{
+  0%{transform:scale(1)}
+  40%{transform:scale(1.12);box-shadow:0 0 0 14px rgba(108,195,32,.25),0 18px 38px rgba(108,195,32,.45)}
+  100%{transform:scale(1);box-shadow:0 12px 30px rgba(0,0,0,.45)}
+}
+
+.cert-label{
+  font-family:var(--font-en);font-weight:700;
+  font-size:clamp(16px,1.7vw,25px);line-height:1.15;
+  text-align:center;color:#fff;
+  text-shadow:0 2px 8px rgba(0,0,0,.7);
+}
+
+/* Positions (desktop constellation) */
+.pos-tl{top:8%;left:14%}
+.pos-tr{top:8%;right:14%}
+.pos-ml{top:46%;left:4%}
+.pos-mr{top:46%;right:4%}
+.pos-bc{bottom:2%;left:50%;transform:translateX(-50%)}
+.pos-bc:hover{transform:translateX(-50%) translateY(-8px) scale(1.05)}
+.pos-bc:active{transform:translateX(-50%) translateY(-2px) scale(.98)}
 
 /* ==================== PROBLEMS ==================== */
 .problems{padding:80px 20px}
@@ -428,9 +485,10 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
   .hero-grid{grid-template-columns:1fr;text-align:center}
   .hero-left{order:2}
   .hero-product-img{margin:0 auto}
-  .cert-grid{grid-template-columns:repeat(3,1fr);gap:30px}
-  .cert-item.center-cert{grid-column:span 3;grid-row:auto}
-  .cert-img.big{width:220px;height:220px}
+  .cert-stage{aspect-ratio:auto;display:grid;grid-template-columns:repeat(3,1fr);gap:36px 30px;max-width:760px}
+  .cert-stage>*{position:static!important;transform:none!important}
+  .cert-center{order:0;grid-column:1 / -1;width:60%;margin:0 auto;aspect-ratio:1/1}
+  .pos-bc:hover,.pos-bc:active{transform:translateY(-8px) scale(1.05)!important}
   .problems-grid{grid-template-columns:repeat(4,1fr)}
   .reviews-grid{grid-template-columns:repeat(2,1fr)}
   .benefits-grid{grid-template-columns:1fr}
@@ -461,10 +519,9 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
   .hero-card{padding:22px 18px}
   .what-panel,.benefits-panel{padding:30px 20px;border-radius:28px}
   .heritage,.problems,.what-is,.benefits,.experts,.how-to-use,.reviews,.faq-sec{padding:50px 12px}
-  .cert-grid{grid-template-columns:repeat(2,1fr);gap:24px}
-  .cert-item.center-cert{grid-column:span 2}
-  .cert-img{width:110px;height:110px}
-  .cert-img.big{width:180px;height:180px}
+  .cert-stage{grid-template-columns:repeat(2,1fr);gap:30px 20px}
+  .cert-center{grid-column:1 / -1;width:70%}
+  .cert-badge .cert-img{width:110px;height:110px}
   .problems-grid{grid-template-columns:repeat(2,1fr);gap:24px}
   .problem-img{width:100px;height:100px}
   .reviews-grid{grid-template-columns:1fr}
@@ -480,8 +537,8 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 
 @media (max-width:430px){
   .nav-cta{padding:8px 14px;font-size:14px}
-  .cert-grid{grid-template-columns:1fr}
-  .cert-item.center-cert{grid-column:auto}
+  .cert-stage{grid-template-columns:1fr 1fr}
+  .cert-center{width:80%}
   .lead-form{padding:30px 22px}
 }
 
