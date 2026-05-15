@@ -16,13 +16,32 @@
   const hamburger = document.getElementById('hamburger');
   const navLinks = document.getElementById('navLinks');
   hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('open');
-    navLinks.classList.toggle('open');
+    const isOpen = hamburger.classList.toggle('open');
+    navLinks.classList.toggle('open', isOpen);
+    hamburger.setAttribute('aria-expanded', String(isOpen));
   });
   navLinks.querySelectorAll('a').forEach(a => {
     a.addEventListener('click', () => {
       hamburger.classList.remove('open');
       navLinks.classList.remove('open');
+    });
+  });
+
+  /* ---------- Interactive button feedback (ripple + haptic) ---------- */
+  const interactiveBtns = document.querySelectorAll('.cta-btn, .nav-cta, .float-call');
+  interactiveBtns.forEach(btn => {
+    btn.style.position = btn.style.position || 'relative';
+    btn.addEventListener('click', e => {
+      const rect = btn.getBoundingClientRect();
+      const ripple = document.createElement('span');
+      const size = Math.max(rect.width, rect.height);
+      ripple.className = 'ripple';
+      ripple.style.width = ripple.style.height = size + 'px';
+      ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+      ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+      btn.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 650);
+      if (navigator.vibrate) navigator.vibrate(15);
     });
   });
 

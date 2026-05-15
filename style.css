@@ -53,24 +53,41 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
   background:#1c2616;backdrop-filter:blur(4px);
   transition:box-shadow .3s ease,background .3s ease;
 }
-.navbar.scrolled{box-shadow:0 6px 24px rgba(0,0,0,.45);background:rgba(28,38,22,.95)}
+.navbar.scrolled{box-shadow:0 6px 24px rgba(0,0,0,.45);background:rgba(28,38,22,.97)}
 .nav-inner{
-  display:flex;align-items:center;justify-content:space-between;
-  gap:20px;padding:14px 28px;max-width:1440px;margin:0 auto;
+  position:relative;
+  display:flex;flex-direction:column;align-items:center;
+  gap:14px;padding:14px 28px 18px;max-width:1440px;margin:0 auto;
 }
-.brand{color:#f5f5f5;font-weight:700;font-size:clamp(20px,2.5vw,32px);white-space:nowrap}
-.nav-links{display:flex;gap:26px}
+.brand{
+  color:#f5f5f5;font-weight:700;
+  font-size:clamp(22px,2.6vw,35px);white-space:nowrap;letter-spacing:.3px;
+}
+.nav-cta{
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--green);color:#000;font-weight:700;
+  padding:10px 22px;border-radius:6px;font-size:clamp(15px,1.6vw,20px);
+  white-space:nowrap;letter-spacing:.2px;
+  transition:transform .2s ease, box-shadow .25s ease, background .25s ease;
+  position:relative;overflow:hidden;
+  box-shadow:0 4px 14px rgba(108,195,32,.35);
+}
+.nav-cta::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(120deg,transparent,rgba(255,255,255,.55),transparent);
+  transform:translateX(-120%);transition:transform .65s ease;
+}
+.nav-cta:hover{transform:translateY(-2px) scale(1.03);box-shadow:0 10px 22px rgba(108,195,32,.55);background:#7fdc2b}
+.nav-cta:hover::before{transform:translateX(120%)}
+.nav-cta:active{transform:translateY(0) scale(.98)}
+
+.nav-links{display:none;gap:26px}
 .nav-links a{color:#f5f5f5;font-size:15px;font-weight:500;position:relative;transition:color .2s}
 .nav-links a::after{content:"";position:absolute;left:0;bottom:-4px;width:0;height:2px;background:var(--green);transition:width .3s}
 .nav-links a:hover{color:var(--green)}
 .nav-links a:hover::after{width:100%}
-.nav-cta{
-  background:var(--green);color:#000;font-weight:700;
-  padding:10px 18px;border-radius:6px;font-size:15px;white-space:nowrap;
-  transition:transform .2s, box-shadow .2s;
-}
-.nav-cta:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(108,195,32,.4)}
-.nav-stripe{height:8px;background:var(--green)}
+
+.nav-stripe{height:9px;background:var(--green)}
 .hamburger{
   display:none;flex-direction:column;gap:5px;padding:8px;
 }
@@ -135,6 +152,12 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 .cta-btn:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 14px 36px rgba(108,195,32,.6)}
 .cta-btn:hover::before{transform:translateX(100%)}
 .cta-btn:active{transform:translateY(0) scale(.98)}
+.ripple{
+  position:absolute;border-radius:50%;pointer-events:none;
+  background:rgba(255,255,255,.55);
+  transform:scale(0);animation:ripple .6s ease-out;
+}
+@keyframes ripple{to{transform:scale(2.4);opacity:0}}
 .hero-cta{margin-top:6px}
 .cta-wrap{display:flex;justify-content:center;padding:40px 0 10px}
 
@@ -402,7 +425,6 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 
 /* ==================== RESPONSIVE ==================== */
 @media (max-width:1100px){
-  .nav-links{display:none}
   .hero-grid{grid-template-columns:1fr;text-align:center}
   .hero-left{order:2}
   .hero-product-img{margin:0 auto}
@@ -424,12 +446,13 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
   .nav-cta{font-size:13px;padding:8px 12px}
   .nav-inner{padding:12px 18px}
   .brand{font-size:18px}
-  .hamburger{display:flex}
+  .hamburger{display:flex;position:absolute;top:14px;right:18px}
   .nav-links{
     position:absolute;top:100%;left:0;right:0;background:#1c2616;
     flex-direction:column;align-items:stretch;padding:18px 24px;gap:14px;
     transform:translateY(-110%);transition:transform .35s ease;
     box-shadow:0 10px 24px rgba(0,0,0,.5);
+    z-index:5;display:none;
   }
   .nav-links.open{display:flex;transform:translateY(0)}
   .nav-links a{padding:8px 0;border-bottom:1px solid rgba(255,255,255,.08)}
@@ -456,7 +479,7 @@ button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
 }
 
 @media (max-width:430px){
-  .nav-cta{display:none}
+  .nav-cta{padding:8px 14px;font-size:14px}
   .cert-grid{grid-template-columns:1fr}
   .cert-item.center-cert{grid-column:auto}
   .lead-form{padding:30px 22px}
